@@ -23,8 +23,6 @@ RUN curl --create-dirs -sSLo /usr/share/jenkins/swarm-client-$JENKINS_SWARM_VERS
 
 COPY jenkins-slave.sh /usr/local/bin/jenkins-slave.sh
 
-
-USER jenkins-slave
 VOLUME /home/jenkins-slave
 
 ENTRYPOINT ["/usr/local/bin/jenkins-slave.sh"]
