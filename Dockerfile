@@ -6,6 +6,7 @@ ARG DOCKER_CLI_VERSION='1.12.2'
 ARG JENKINS_SWARM_VERSION='2.2'
 
 ENV HOME /home/jenkins-slave
+WORKDIR /home/jenkins-slave
 
 # install netstat to allow connection health check with
 # netstat -tan | grep ESTABLISHED

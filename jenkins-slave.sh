@@ -6,8 +6,8 @@
                 --storage-driver=vfs &
 
 if [ -n "${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}" ] && [ -n "${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}" ];then
-  mkdir "/root/.docker"
-  echo "{\"auths\": {\"${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}\": {\"auth\": \"${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}\"}}}" > "/root/.docker/config.json"
+  mkdir ".docker"
+  echo "{\"auths\": {\"${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}\": {\"auth\": \"${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}\"}}}" > ".docker/config.json"
 fi
 
 # if `docker run` first argument start with `-` the user is passing jenkins swarm launcher arguments
