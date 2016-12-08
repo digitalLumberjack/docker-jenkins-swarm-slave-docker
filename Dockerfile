@@ -1,4 +1,4 @@
-FROM openjdk:8u102-jdk
+FROM docker:1.12.3-dind
 
 MAINTAINER digitalLumberjack <digitallumberjack@gmail.com>
 
@@ -9,15 +9,9 @@ ENV HOME /home/jenkins-slave
 
 # install netstat to allow connection health check with
 # netstat -tan | grep ESTABLISHED
-RUN apt-get update && apt-get install -y net-tools && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache net-tools openjdk8-jre
 
-# install docker
-RUN wget https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_CLI_VERSION}.tgz -O docker.tgz \
-  && tar xvf docker.tgz \
-  && mv docker/docker /usr/local/bin/ \
-  && rm -rf docker.tgz docker
 
-RUN useradd -c "Jenkins Slave user" -d $HOME -m jenkins-slave
 RUN curl --create-dirs -sSLo /usr/share/jenkins/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/$JENKINS_SWARM_VERSION/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar \
   && chmod 755 /usr/share/jenkins
 
