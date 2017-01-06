@@ -10,7 +10,7 @@ WORKDIR /home/jenkins-slave
 
 # install netstat to allow connection health check with
 # netstat -tan | grep ESTABLISHED
-RUN apk add --no-cache net-tools openjdk8-jre
+RUN apk update && apk add --no-cache net-tools openjdk8-jre openssh-client
 
 
 RUN curl --create-dirs -sSLo /usr/share/jenkins/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/$JENKINS_SWARM_VERSION/swarm-client-$JENKINS_SWARM_VERSION-jar-with-dependencies.jar \
