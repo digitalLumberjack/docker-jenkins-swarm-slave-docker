@@ -10,6 +10,10 @@ if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then
   if [[ "$@" != *"-master "* ]] && [ ! -z "$JENKINS_PORT_8080_TCP_ADDR" ]; then
     PARAMS="-master http://$JENKINS_PORT_8080_TCP_ADDR:$JENKINS_PORT_8080_TCP_PORT"
   fi
+  if [ -n "${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}" ] && [ -n "${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}" ];then
+    mkdir -p ".docker"
+    echo "{\"auths\": {\"${RUNNER_DOCKER_PRIVATE_REGISTRY_URL}\": {\"auth\": \"${RUNNER_DOCKER_PRIVATE_REGISTRY_TOKEN}\"}}}" > ".docker/config.json"
+  fi
 
   echo Running java $JAVA_OPTS -jar $JAR -fsroot $HOME $PARAMS "$@"
   exec java $JAVA_OPTS -jar $JAR -fsroot $HOME $PARAMS "$@"
