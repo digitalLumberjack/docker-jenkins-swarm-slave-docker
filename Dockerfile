@@ -2,7 +2,7 @@ FROM openjdk:8u102-jdk
 
 MAINTAINER digitalLumberjack <digitallumberjack@gmail.com>
 
-ARG DOCKER_CLI_VERSION='1.12.2'
+ARG DOCKER_CLI_VERSION='1.13.0-rc2'
 ARG JENKINS_SWARM_VERSION='2.2'
 
 ENV HOME /home/jenkins-slave
@@ -12,7 +12,7 @@ ENV HOME /home/jenkins-slave
 RUN apt-get update && apt-get install -y net-tools && rm -rf /var/lib/apt/lists/*
 
 # install docker
-RUN wget https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_CLI_VERSION}.tgz -O docker.tgz \
+RUN wget https://test.docker.com/builds/Linux/x86_64/docker-${DOCKER_CLI_VERSION}.tgz -O docker.tgz \
   && tar xvf docker.tgz \
   && mv docker/docker /usr/local/bin/ \
   && rm -rf docker.tgz docker
